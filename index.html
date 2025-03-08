@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трекер целей и событий</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header-controls">
+        <div class="header-time">
+            <div class="human-time">
+                <div class="human-time-clock" id="humanClock">00:00:00</div>
+                <div class="human-time-date" id="humanDate">1 января 2024</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- События (главная страница) -->
+        <div id="eventsPage" class="page active">
+            <section class="events-section">
+                <h2>Мои события</h2>
+                <div id="eventsList" class="events-list"></div>
+                <button id="addEventBtn" class="add-btn">Добавить событие</button>
+            </section>
+        </div>
+
+        <!-- Цели -->
+        <div id="goalsPage" class="page">
+            <section class="goals-section">
+                <h2>Мои цели</h2>
+                <div id="goalsList" class="goals-list"></div>
+                <button id="addGoalBtn" class="add-btn">Добавить цель</button>
+            </section>
+        </div>
+
+        <!-- Настройки -->
+        <div id="settingsPage" class="page">
+            <section class="settings-section">
+                <div class="settings-list">
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <h3>Тема оформления</h3>
+                            <div class="theme-buttons">
+                                <button class="theme-btn" data-theme="light">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke-width="2"/>
+                                        <path d="M12 3V5M12 19V21M5 12H3M21 12H19M18.364 5.636L16.95 7.05M7.05 16.95L5.636 18.364M18.364 18.364L16.95 16.95M7.05 7.05L5.636 5.636" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    Светлая тема
+                                </button>
+                                <button class="theme-btn" data-theme="dark">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Темная тема
+                                </button>
+                                <button class="theme-btn" data-theme="lgbt">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M3 12h18M3 6h18M3 18h18" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    ЛГБТ+ тема
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <h3>Управление данными</h3>
+                            <div class="data-buttons">
+                                <button id="exportDataBtn" class="settings-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Экспортировать данные
+                                </button>
+                                <button id="importDataBtn" class="settings-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Импортировать данные
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <h3>О приложении</h3>
+                            <div class="about-info">
+                                <p>Трекер целей и событий поможет вам отслеживать ваши достижения и важные даты.</p>
+                                <p>Автор: <a href="https://t.me/clownades" target="_blank">@clownades</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- iPhone-style bottom navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <button class="nav-btn active" data-page="eventsPage">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM16 2v4M8 2v4M3 10h18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                События
+            </button>
+            <button class="nav-btn" data-page="goalsPage">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 20V10m0 0l-4 4m4-4l4 4M4 4h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Цели
+            </button>
+            <button class="nav-btn" data-page="settingsPage">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Настройки
+            </button>
+        </div>
+    </nav>
+
+    <!-- Модальные окна остаются без изменений -->
+    <!-- Модальное окно для добавления цели -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <h2>Добавить новую цель</h2>
+            <form id="goalForm">
+                <input type="text" id="goalName" placeholder="Название цели" required>
+                <button type="submit">Начать отсчет</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для добавления события -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <h2>Добавить новое событие</h2>
+            <form id="eventForm">
+                <input type="text" id="eventName" placeholder="Название события" required>
+                <input type="datetime-local" id="eventDateTime" required>
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для достижений -->
+    <div id="achievementModal" class="modal">
+        <div class="modal-content achievement">
+            <h2>Поздравляем!</h2>
+            <p id="achievementText"></p>
+            <button class="close-btn">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для выбора элементов для копирования -->
+    <div id="copyModal" class="modal">
+        <div class="modal-content">
+            <h2>Выберите элементы для копирования</h2>
+            <div class="copy-list">
+                <div class="copy-section">
+                    <div class="section-header">
+                        <h3>Цели</h3>
+                        <label class="select-all">
+                            <input type="checkbox" id="selectAllGoals"> Выбрать все цели
+                        </label>
+                    </div>
+                    <div id="copyGoalsList" class="items-list"></div>
+                </div>
+                <div class="copy-section">
+                    <div class="section-header">
+                        <h3>События</h3>
+                        <label class="select-all">
+                            <input type="checkbox" id="selectAllEvents"> Выбрать все события
+                        </label>
+                    </div>
+                    <div id="copyEventsList" class="items-list"></div>
+                </div>
+                <div class="copy-buttons">
+                    <button id="copySelectedBtn" class="control-btn">Копировать выбранное</button>
+                    <button id="closeCopyBtn" class="control-btn">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для экспорта данных -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <h2>Экспорт данных</h2>
+            <div id="exportPreview" class="export-preview"></div>
+            <div class="export-actions">
+                <button id="copyExportBtn" class="control-btn">Копировать</button>
+                <button id="closeExportBtn" class="control-btn">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html> 
